@@ -12,7 +12,7 @@ class Spaceship {
     // Attack Commmnd
     attack(target) {
         // RNG
-        if(this.hull <= 0){
+        if (this.hull <= 0) {
             return;
         }
         if (Math.random(1) > this.accuracy) {
@@ -48,8 +48,8 @@ class USS_Assembly extends Spaceship {
         target.hull -= 10;
         damageCap(target);
         this.missles -= 1;
-        console.log(`%c${target.name} got obliterated by the missles for 10 damage\n${target.name} HP: ${target.hull}`,`color:blue`);
-        if(target.hull <= 0) {
+        console.log(`%c${target.name} got obliterated by the missles for 10 damage\n${target.name} HP: ${target.hull}`, `color:blue`);
+        if (target.hull <= 0) {
             destroyed(target);
         }
         return "OK";
@@ -97,7 +97,7 @@ class Mega_Ship extends Spaceship {
             this.attack(target);
         }
         let value = 2 * hits;
-        if(Math.random() > .9) {
+        if (Math.random() > .9) {
             console.log(`%cThe ${this.name} used its multi missles to hit you ${hits} time(s) for ${value} damage\nBut it missed!`, `color:blue`);
             return;
         }
@@ -179,7 +179,7 @@ function bossFightCommands() {
             case "RETREAT": retreat();
                 break;
             default: command = "NULL";
-            console.log("Invalid Command");
+                console.log("Invalid Command");
         }
     } while (command === "NULL");
     return command;
@@ -284,10 +284,10 @@ function bossFight(player, boss) {
                 boss.attack(player);
                 if (checkGameOver()) return;
             }
-            
+
         }
     }
-    if(boss.hull <= 0) {
+    if (boss.hull <= 0) {
         console.log("%c----------------------Congratulations----------------------", "color:green");
     }
 }
@@ -319,14 +319,15 @@ function startGame() {
 }
 
 
+$('button').on("click", function () {
+    player = new USS_Assembly(); // Player ship
+    enemyArr = []; // Enemies
+    generateShips(randomInt(5, 10)); //Generating enemy ships
+    podArr = [];
+    boss = new Mega_Ship();
+    startGame(); // Starts the game
+});
 
-// Setting up the actual game
-player = new USS_Assembly(); // Player ship
-enemyArr = []; // Enemies
-generateShips(randomInt(5, 10)); //Generating enemy ships
-podArr = [];
-boss = new Mega_Ship();
-startGame(); // Starts the game
 
 
 
